@@ -12,7 +12,7 @@ public final class App {
          * Imposto tutti i parametri necessari per l'esecuzione del programma.
          */
         int scelta = 0, id = 0;
-        String nome, cognome, numero, email;
+        String nome = null, cognome, numero, email;
         contatto c = new contatto();
         Scanner s = new Scanner(System.in);
 
@@ -98,22 +98,46 @@ public final class App {
                      */
                     System.out.println("------------ MODIFICA CONTATTO ------------" + "\n");
                     System.out.println("Cosa vuoi modificare?" + "\n" + "1) Nome" + "\n" + "2) Cognome" + "\n"
-                            + "3) Numero di telefono" + "\n" + "4) Email" + "\n" + "Scelta:");
+                            + "3) Numero di telefono" + "\n" + "4) Email" + "\n" + "5) Annulla" + "\n" + "Scelta:");
 
                     scelta2 = s.nextInt();
                     s.nextLine();
                     switch (scelta2) {
                     /**
-                     * Modifica il nome, visualizzando prima quello inserito in precedenza.
+                     * Ogni caso modifica un preciso parametro, visualizzando prima quello inserito
+                     * in precedenza.
                      */
                     case 1:
                         System.out.println(
                                 "Attualmente il nome e': " + c.getNome() + "." + "\n" + "Scrivi il nuovo nome: ");
-                        nome = s.nextLine();
-                        /**
-                         * Visualizza il nuovo nome inserito.
-                         */
-                        System.out.println("Fatto. Ora il nome e' " + c.getNome() + ".");
+                        c.setNome(s.nextLine());
+                        System.out.println("Fatto. Ora il nome e' " + c.getNome() + "." + "\n"
+                                + "----------------------------------------------" + "\n");
+                        break;
+                    case 2:
+                        System.out.println(
+                                "Attualmente il nome e': " + c.getCognome() + "." + "\n" + "Scrivi il nuovo cognome: ");
+                        c.setCognome(s.nextLine());
+                        System.out.println("Fatto. Ora il nome e' " + c.getCognome() + "." + "\n"
+                                + "----------------------------------------------" + "\n");
+                        break;
+                    case 3:
+                        System.out.println(
+                                "Attualmente il numero e': " + c.getNumero() + "." + "\n" + "Scrivi il nuovo numero: ");
+                        c.setNumero(s.nextLine());
+                        System.out.println("Fatto. Ora il numero e': " + c.getNumero() + "." + "\n"
+                                + "----------------------------------------------" + "\n");
+
+                    case 4:
+                        System.out.println(
+                                "Attualmente l'email e': " + c.getEmail() + "." + "\n" + "Scrivi la nuova email: ");
+                        c.setEmail(s.nextLine());
+                        System.out.println("Fatto. Ora l'email e': " + c.getEmail() + "." + "\n"
+                                + "----------------------------------------------" + "\n");
+
+                    case 5:
+                        System.out.println("Operazione annullata!" + "\n"
+                                + "----------------------------------------------" + "\n");
                         break;
 
                     default:
@@ -128,6 +152,14 @@ public final class App {
                 }
                 break;
             case 3:
+                c.setNome(null);
+                c.setCognome(null);
+                c.setEmail(null);
+                c.setNumero(null);
+                id--;
+
+                System.out.println(
+                        "Contatto eliminato!" + "\n" + "----------------------------------------------" + "\n");
                 break;
             case 4:
                 /**
@@ -148,7 +180,20 @@ public final class App {
                         + c.getEmail() + "\n" + "----------------------------------------------" + "\n");
                 break;
             case 5:
+                String ricerca;
+                System.out.println("Scrivi il nome del contatto da cercare: ");
+                ricerca = s.nextLine();
 
+                if (nome.equals(ricerca)) {
+                    System.out.println("Il contatto e' presente in rubrica.");
+                    System.out.println(
+                            "ID: " + c.getId() + "\n" + "Nome: " + c.getNome() + "\n" + "Cognome: " + c.getCognome()
+                                    + "\n" + "Numero di telefono: " + c.getNumero() + "\n" + "Indirizzo email: "
+                                    + c.getEmail() + "\n" + "----------------------------------------------" + "\n");
+                    break;
+                } else {
+                    System.out.println("Il contatto non esiste.");
+                }
                 break;
 
             case 6:
